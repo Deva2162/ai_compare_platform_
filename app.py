@@ -13,7 +13,7 @@ app = Flask(__name__)
 # AI 1 - OpenAI (GPT)
 # ===============================
 def get_ai1_response(prompt):
-    api_key = os.getenv("OPENAI_API_KEY")
+    api_key = os.getenv("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")
 
     headers = {
         "Authorization": f"Bearer {api_key}",
