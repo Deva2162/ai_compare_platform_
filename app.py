@@ -81,7 +81,7 @@ def get_ai2_response(prompt):
 # AI 3 - Gemini (Google)
 # ===============================
 def get_ai3_response(prompt):
-    api_key = os.getenv("GEMINI_API_KEY")
+    api_key = os.getenv("AIzaSyA-YxEOecereAYOk9o6uZyH29WUe6E8S-A")
 
     url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key={api_key}"
 
