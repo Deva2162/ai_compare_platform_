@@ -80,10 +80,45 @@ def get_ai2_response(prompt):
 # ===============================
 # AI 3 - Gemini (Google)
 # ===============================
-def get_ai3_response(prompt):
-    api_key = os.getenv("GOOGLE_API_KEY")
+# def get_ai3_response(prompt):
+#     api_key = os.getenv("GOOGLE_API_KEY")
 
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key={api_key}"
+#     url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key={api_key}"
+
+#     headers = {
+#         "Content-Type": "application/json"
+#     }
+
+#     data = {
+#         "contents": [
+#             {
+#                 "parts": [
+#                     {"text": prompt}
+#                 ]
+#             }
+#         ]
+#     }
+
+#     response = requests.post(
+#         url,
+#         headers=headers,
+#         json=data,
+#         timeout=30
+#     )
+
+#     result = response.json()
+
+#     if "candidates" in result:
+#         return result["candidates"][0]["content"]["parts"][0]["text"]
+#     else:
+#         return f"Error: {result}"
+def get_ai3_response(prompt):
+    api_key = os.getenv("GEMINI_API_KEY")
+
+    if not api_key:
+        return "Gemini API Key Missing"
+
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={api_key}"
 
     headers = {
         "Content-Type": "application/json"
@@ -99,20 +134,16 @@ def get_ai3_response(prompt):
         ]
     }
 
-    response = requests.post(
-        url,
-        headers=headers,
-        json=data,
-        timeout=30
-    )
+    response = requests.post(url, headers=headers, json=data, timeout=30)
 
-    result = response.json()
+    print(response.status_code)
+    print(response.text)   # 👈 Logs me error dikhega
 
-    if "candidates" in result:
+    if response.status_code == 200:
+        result = response.json()
         return result["candidates"][0]["content"]["parts"][0]["text"]
     else:
-        return f"Error: {result}"
-
+        return f"Error: {response.text}"
 
 # ===============================
 # ROUTES
