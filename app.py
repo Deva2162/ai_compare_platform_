@@ -293,7 +293,7 @@ def get_gemini_response(prompt):
     if not api_key:
         return "Gemini API Key Missing"
 
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={api_key}"
+    url = url = f"https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key={api_key}"
 
     headers = {
         "Content-Type": "application/json"
